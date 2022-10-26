@@ -8,10 +8,12 @@ preto = (0, 0, 0)
 
 class Pacman:
 
-    def __init__(self):      # Definicao de tamanho, raio e centro.
+    # Larissa: Atualizei a característica tamanho do pacman de "640 // 30"
+    # para tanho que varia de acordo com o tamanho dos retangulos
+    def __init__(self, tamanho):      # Definicao de tamanho, raio e centro.
         self.centro_x = 320
         self.centro_y = 240
-        self.tamanho = 640 // 30
+        self.tamanho = tamanho
         self.raio = self.tamanho // 2
         self.velocidade_x = 0
         self.velocidade_y = 0
