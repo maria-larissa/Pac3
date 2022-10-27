@@ -1,8 +1,6 @@
 import pygame
+import cores
 
-verde = (0, 255, 128)
-preto = (0, 0, 0)
-branco = (255, 255, 255)
 
 class Cenario:
 
@@ -48,26 +46,27 @@ class Cenario:
             # calculando as coordenadas do canto superior de cada retângulo da matriz
             co_x = n_coluna * self.tamanho
             co_y = n_linha * self.tamanho
-            # print(co_x, co_y)
-            # Escolhendo a cor
-            if self.fase == 1:
-                if coluna == 2:
-                    cor = verde
-                    pygame.draw.rect(tela_principal, cor, (co_x, co_y, self.tamanho, self.tamanho), 0)
-                if coluna == 1:
-                    cor = preto
-                    x_comida = int(co_x + self.tamanho // 2)
-                    y_comida = int(co_y + self.tamanho // 2)
-                    # print(x_comida, y_comida)
-                    pygame.draw.rect(tela_principal, cor, (co_x, co_y, self.tamanho, self.tamanho), 0)
-                    pygame.draw.circle(tela_principal, branco, (x_comida, y_comida), 0.5, 0)
-                if coluna == 0:
-                    cor = preto
-                    pygame.draw.rect(tela_principal, cor, (co_x, co_y, self.tamanho, self.tamanho), 0)
 
-            # Desenhando o retângulo
-        #                     surface        cor     pt_partida     altura          largura
-        #     pygame.draw.rect(tela_principal, verde, (co_x, co_y, self.tamanho, self.tamanho), 0)
+            # print(co_x, co_y)
+
+            # Escolhendo a cor
+            cor = cores.preto
+            if self.fase == 1:
+                cor = cores.verde
+            elif self.fase == 2:
+                cor = cores.laranja
+            elif self.fase == 3:
+                cor = cores.vermelho
+
+            if coluna == 2:
+                pygame.draw.rect(tela_principal, cor, (co_x, co_y, self.tamanho, self.tamanho), 0)
+            if coluna == 1:
+                x_comida = co_x + self.tamanho // 2
+                y_comida = co_y + self.tamanho // 2
+                pygame.draw.circle(tela_principal, cores.branco, (x_comida, y_comida), self.tamanho // 10, 0)
+            if coluna == 0:
+                cor = cores.preto
+                pygame.draw.rect(tela_principal, cor, (co_x, co_y, self.tamanho, self.tamanho), 0)
 
     #  Varre todas as linhas da matriz pra pintar os retângulos
     def pintar_cenario(self, tela_principal):
