@@ -1,10 +1,11 @@
-import pygame
 from pacman import Pacman
 from cenarios import *
+import cores
+import pygame
 
 pygame.init()
 
-preto = (0, 0, 0)
+
 fase = 1
 tamanho = 640 // 30                     # Definição tamanho do pacman e dos retângulos
 
@@ -14,9 +15,8 @@ pacman = Pacman(tamanho)                                           # criando um 
 cen = Cenario(tamanho, fase)                         # Criando objeto do tipo Cenário
 
 while True:
-
     pacman.posicao()                                # Callando posições do pacman
-    tela_principal.fill(preto)                      # Limpando a tela, para mnão aparecer rastros
+    tela_principal.fill(cores.preto)                      # Limpando a tela, para mnão aparecer rastros
     cen.pintar_cenario(tela_principal)          # Pintando o cenário
     pacman.pac_setup(tela_principal)                # Pintando pacman
     pygame.display.update()                         # atualizando o tela_principal

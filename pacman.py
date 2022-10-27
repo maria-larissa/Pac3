@@ -1,9 +1,7 @@
 import pygame
+import cores
 
 pygame.init()
-
-amarelo = (255, 255, 0)
-preto = (0, 0, 0)
 
 
 class Pacman:
@@ -22,7 +20,7 @@ class Pacman:
 
     # Funcao para criar e pintar o pacman
     def pac_setup(self, tela_principal):
-        pygame.draw.circle(tela_principal, amarelo, (self.centro_x, self.centro_y), self.raio, 0)
+        pygame.draw.circle(tela_principal, cores.amarelo, (self.centro_x, self.centro_y), self.raio, 0)
 
     # criando as coordenadas da boca do pacman
         canto_da_boca = (self.centro_x, self.centro_y)
@@ -31,7 +29,7 @@ class Pacman:
         pontos = [canto_da_boca, labio_superior, labio_inferior]
 
     # Criando o desenho da boca
-        pygame.draw.polygon(tela_principal, preto, pontos, 0)
+        pygame.draw.polygon(tela_principal, cores.preto, pontos, 0)
 
     # criando as coordenadas do olho do pacman
         olho_x = int(self.centro_x + self.raio / 3)
@@ -39,7 +37,7 @@ class Pacman:
         raio_olho = int(self.raio / 10)
 
     # Criando desenho do olho
-        pygame.draw.circle(tela_principal, preto, (olho_x, olho_y), raio_olho, 0)
+        pygame.draw.circle(tela_principal, cores.preto, (olho_x, olho_y), raio_olho, 0)
 
     # Calcula novas posicoes
     def posicao(self):
