@@ -49,7 +49,6 @@ class Pacman:
     # Criando desenho do olho
         pygame.draw.circle(tela_principal, cores.preto, (olho_x, olho_y), raio_olho, 0)
 
-
     # Verifica  as teclas que estao sendo apertadas
     def process_events(self, eventos):
         for e in eventos:
