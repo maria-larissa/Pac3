@@ -1,5 +1,5 @@
 import pygame
-from Pac3.pacman import Pacman
+from pacman import Pacman
 
 pygame.init()
 
