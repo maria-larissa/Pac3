@@ -167,7 +167,7 @@ class Cenario:
 
     # Função teste se o pacman pode se mover para a nova posição desejada
     # retira comida quando o pacman passa
-    def teste_colisao(self):
+    def teste_colisao_pac(self):
         nova_col = self.pacman.col_intencao
         nova_lin = self.pacman.lin_intencao
         if 0 <= nova_col < 29 and 0 <= nova_lin < 30:
@@ -175,7 +175,6 @@ class Cenario:
                 self.pacman.prox_posicao()
                 if self.matriz[nova_lin][nova_col] == 1:
                     self.pontos += 1
-                    print(self.pontos)
                     self.matriz[nova_lin][nova_col] = 0
                 if self.matriz[nova_lin][nova_col] == 0:
                     if nova_lin in range(13, 16) and nova_col in range(12, 15):

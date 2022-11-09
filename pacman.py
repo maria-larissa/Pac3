@@ -65,7 +65,6 @@ class Pacman:
                 else:
                     if e.mod & pygame.KMOD_SHIFT:
                         if e.key == pygame.K_DELETE:
-                            print(self.fase)
                             print("Tecla secreta")
                             if 1 <= self.fase <= 3:
                                 self.fase += 1
