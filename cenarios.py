@@ -165,6 +165,28 @@ class Cenario:
         for n_linha, linha in enumerate(self.matriz):
             self.pintar_coluna(tela_principal, n_linha, linha)
 
+    # printar informações do jogo na tela
+    def informacoes(self, tela_principal):
+
+        # fase
+
+        fonte_fase = pygame.font.SysFont("times", 36, True, False)
+        texto_fase = "Fase: {}".format(str(self.fase))
+        if self.fase == 1:
+            img_fase = fonte_fase.render(texto_fase, True, cores.verde)
+        elif self.fase == 2:
+            img_fase = fonte_fase.render(texto_fase, True, cores.laranja)
+        elif self.fase == 3:
+            img_fase = fonte_fase.render(texto_fase, True, cores.vermelho)
+        tela_principal.blit(img_fase, (620, 200))
+
+        # pontos
+
+        fonte_pontos = pygame.font.SysFont("times", 32, True, True)
+        texto_pontos = "Pontos: {}".format(str(self.pontos))
+        img_pontos = fonte_pontos.render(texto_pontos, True, cores.branco)
+        tela_principal.blit(img_pontos, (612, 300))
+
     # Função teste se o pacman pode se mover para a nova posição desejada
     # retira comida quando o pacman passa
     def teste_colisao_pac(self):
