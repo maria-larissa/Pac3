@@ -2,11 +2,7 @@ from pacman import Pacman
 from cenarios import *
 import cores
 import pygame
-<<<<<<< HEAD
-
-=======
 from pacman import Pacman
->>>>>>> 14515e32927b1440c77d93df4ce4e438fd68310a
 
 pygame.init()
 
