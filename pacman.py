@@ -63,9 +63,8 @@ class Pacman:
                 elif e.key == pygame.K_DOWN:
                     self.velocidade_y = self.velocidade
                 else:
-                    if e.mod & pygame.KMOD_SHIFT:
+                    if e.mod & pygame.KMOD_SHIFT:                   # tecla secreta
                         if e.key == pygame.K_DELETE:
-                            print("Tecla secreta")
                             if 1 <= self.fase <= 3:
                                 self.fase += 1
                                 self.centro_x = 400
@@ -95,3 +94,40 @@ class Pacman:
     def prox_posicao(self):
         self.lin = self.lin_intencao
         self.col = self.col_intencao
+
+
+class PacmanAnimacao:
+    def __init__(self, tamanho):      # Definicao de tamanho, raio e centro.
+        self.centro_x = 8
+        self.centro_y = 450
+        self.tamanho = tamanho
+        self.raio = self.tamanho // 2
+        self.velocidade_x = 1
+        self.velocidade = 30
+
+    def pac_setup(self, tela_principal):
+        pygame.draw.circle(tela_principal, cores.amarelo, (self.centro_x, self.centro_y), self.raio, 0)
+
+    # criando as coordenadas da boca do pacman
+        canto_da_boca = (self.centro_x, self.centro_y)
+        labio_superior = (self.centro_x + self.raio, self.centro_y - self.raio)
+        labio_inferior = (self.centro_x + self.raio, self.centro_y)
+        pontos = [canto_da_boca, labio_superior, labio_inferior]
+
+    # Criando o desenho da boca
+        pygame.draw.polygon(tela_principal, cores.preto, pontos, 0)
+
+    # criando as coordenadas do olho do pacman
+        olho_x = int(self.centro_x + self.raio / 3)
+        olho_y = int(self.centro_y - self.raio * 0.65)
+        raio_olho = int(self.raio / 10)
+
+    # Criando desenho do olho
+        pygame.draw.circle(tela_principal, cores.preto, (olho_x, olho_y), raio_olho, 0)
+
+    def posicao(self):
+        self.centro_x = self.centro_x + self.velocidade
+        if self.centro_x - self.raio <= 0:
+            self.velocidade = 30
+        if self.centro_x + self.raio >= 800:
+            self.velocidade = -30

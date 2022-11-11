@@ -1,9 +1,22 @@
 import pygame
 import cores
 
-# fase1 = 325 pontos
-# fase2 = 477 pontos
-# fase3 = 306 pontos
+# Como funciona o cálculo
+'''
+    2- parede
+    1 - comida
+    0 - vazio
+
+    coordenadas retnagulos
+    tamanho = 800 // 30
+    x = col * tamanho
+    y = lin * tamanho
+
+    fase1 = 325 pontos
+    fase2 = 385 pontos
+    fase3 = 321 ponto
+'''
+
 
 
 class Cenario:
@@ -87,7 +100,7 @@ class Cenario:
                 [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2]
             ]           # atualiza matriz
             self.pontos = 0                         # zera pontos
-        else:
+        elif self.fase == 3:
             self.aux = self.fase                    # atualiza variável aux
             self.pacman = self.pacman
             self.matriz = [
@@ -169,8 +182,7 @@ class Cenario:
     def informacoes(self, tela_principal):
 
         # fase
-
-        fonte_fase = pygame.font.SysFont("times", 36, True, False)
+        fonte_fase = pygame.font.SysFont("times", 36, True, False)          # (fonte, tamanho, negrito, itálico)
         texto_fase = "Fase: {}".format(str(self.fase))
         if self.fase == 1:
             img_fase = fonte_fase.render(texto_fase, True, cores.verde)
@@ -181,8 +193,7 @@ class Cenario:
         tela_principal.blit(img_fase, (620, 200))
 
         # pontos
-
-        fonte_pontos = pygame.font.SysFont("times", 32, True, True)
+        fonte_pontos = pygame.font.SysFont("times", 32, True, True)     # (fonte, tamanho, negrito, itálico)
         texto_pontos = "Pontos: {}".format(str(self.pontos))
         img_pontos = fonte_pontos.render(texto_pontos, True, cores.branco)
         tela_principal.blit(img_pontos, (612, 300))
@@ -193,20 +204,28 @@ class Cenario:
         nova_col = self.pacman.col_intencao
         nova_lin = self.pacman.lin_intencao
         if 0 <= nova_col < 29 and 0 <= nova_lin < 30:
-            if self.matriz[nova_lin][nova_col] != 2:
+            if self.matriz[nova_lin][nova_col] != 2:                # Caso a posição NÃO seja parede
                 self.pacman.prox_posicao()
-                if self.matriz[nova_lin][nova_col] == 1:
+
+                if self.matriz[nova_lin][nova_col] == 1:            # Caso tenha comida aumenta pontos e apaga a comida
                     self.pontos += 1
                     self.matriz[nova_lin][nova_col] = 0
-                if self.matriz[nova_lin][nova_col] == 0:
+
+                if self.matriz[nova_lin][nova_col] == 0:            # verificar se comeu tudo e chegou no centro(portal)
+
+                    # verifica se chegou no centro
                     if nova_lin in range(13, 16) and nova_col in range(12, 15):
+
+                        # verifica se comeu tudo de acordo com a fase
                         if self.pontos == 325 or self.pontos == 385 or self.pontos == 321:
-                            # print("aux")
-                            # print(self.aux)
-                            print("fase")
-                            print(self.fase)
-                            self.aux = self.fase
-                            self.pacman.fase += 1
+
+                            # print("fase")
+                            # print(self.fase)
+
+                            self.aux = self.fase                            # Guarda valor anterior da fase
+                            self.pacman.fase += 1                           # Incrementa a fase, faz passar de fase
+
+                            # Faz pacman voltar pra posição inicial
                             self.pacman.centro_x = 400
                             self.pacman.centro_y = 300
                             self.pacman.velocidade_x = 0
@@ -215,16 +234,5 @@ class Cenario:
                             self.pacman.lin = 1
                             self.pacman.col_intencao = self.pacman.col
                             self.pacman.lin_intencao = self.pacman.lin
-                            self.novo_cenario()
 
-    # Como funciona o cálculo
-    '''
-        2- parede
-        1 - comida
-        0 - vazio
-        
-        coordenadas retnagulos
-        tamanho = 800 // 30
-        x = col * tamanho
-        y = lin * tamanho
-    '''
+                            self.novo_cenario()                             # Atualiza cenário
