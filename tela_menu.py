@@ -10,7 +10,7 @@ class Ponto:
         self.opcao = 1
 
     def desenhar(self):
-        pygame.draw.circle(tela_menu, cores.branco, (self.centro_x, self.centro_y), self.raio, 0)
+            pygame.draw.circle(tela_menu, cores.branco, (self.centro_x, self.centro_y), self.raio, 0)
 
     def pro_eventos(self, lista_eventos):
         for eve in lista_eventos:
@@ -21,31 +21,28 @@ class Ponto:
                     print(self.opcao)
                     print(self.centro_y)
                     if self.opcao == 1:
-                        self.centro_y += 50
+                        self.centro_y += 100
                         self.desenhar()
                     if self.opcao == 2:
-                        self.centro_y += 50
+                        self.centro_y += 100
                         self.desenhar()
                     elif self.opcao == 3:
-                        self.centro_y += 50
+                        self.centro_y += 100
                         self.desenhar()
                     elif self.opcao == 4:
-                        self.centro_y += 50
+                        self.centro_y += 100
                         self.desenhar()
                     self.opcao += 1
                 if eve.key == pygame.K_UP:
                     print(self.opcao)
-                    if self.opcao == 4:
-                        self.centro_y -= 50
+                    if self.opcao == 2:
+                        self.centro_y -= 100
                         self.desenhar()
                     elif self.opcao == 3:
-                        self.centro_y -= 50
+                        self.centro_y -= 100
                         self.desenhar()
-                    elif self.opcao == 2:
-                        self.centro_y -= 50
-                        self.desenhar()
-                    elif self.opcao == 1:
-                        self.centro_y -= 50
+                    elif self.opcao == 4:
+                        self.centro_y -= 100
                         self.desenhar()
                     self.opcao -= 1
 
@@ -59,13 +56,10 @@ while True:
     # o ponto sempre varias nas três posições estabelecidas
 
     tela_menu.fill(cores.preto)
-
-    if pt_opcao.opcao == 5 or pt_opcao.opcao == 0:
-        pt_opcao.opcao = 1
-        pt_opcao.centro_y = 301
-        pt_opcao.desenhar()
-
     pt_opcao.desenhar()
+
+    if pt_opcao.opcao == 5:
+        pt_opcao.opcao = 1
 
     # titulo menu
     fonte = pygame.font.SysFont("times", 38, True, False)  # (fonte, tamanho, negrito, itálico)
@@ -81,15 +75,11 @@ while True:
 
     opcao_about = "About"
     img_about = fonte1.render(opcao_about, True, cores.branco)
-    tela_menu.blit(img_about, (260, 340))
+    tela_menu.blit(img_about, (260, 490))
 
     opcao_about = "Instructions"
     img_instrucao = fonte1.render(opcao_about, True, cores.branco)
     tela_menu.blit(img_instrucao, (260, 390))
-
-    opcao_sair = "Sair"
-    img_sair = fonte1.render(opcao_sair, True, cores.branco)
-    tela_menu.blit(img_sair, (260, 440))
 
     pygame.display.update()
     pygame.time.delay(50)
@@ -103,8 +93,8 @@ while True:
                 if pt_opcao.opcao == 1:
                     print("Começar o jogo!")
                 elif pt_opcao.opcao == 2:
-                    print("About!")
-                elif pt_opcao.opcao == 3:
                     print("Instruções!")
+                elif pt_opcao.opcao == 3:
+                    print("About!")
                 elif pt_opcao.opcao == 4:
                     exit()
