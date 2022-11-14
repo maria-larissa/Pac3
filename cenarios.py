@@ -1,3 +1,4 @@
+from tela_game_over import game_over
 from tela_congratulations import tela_congra
 import pygame
 import cores
@@ -99,6 +100,7 @@ class Cenario:
                 [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2]
             ]           # atualiza matriz
             self.pontos = 0                         # zera pontos
+            self.pacman.vidas = 4
         elif self.fase == 3:
             self.aux = self.fase                    # atualiza variável aux
             self.pacman = self.pacman
@@ -135,6 +137,7 @@ class Cenario:
                 [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
             ]           # atualiza matriz
             self.pontos = 0                         # zera pontos
+            self.pacman.vidas = 3
 
     # Varre a linha dada para pintar cada retâgulo da cor certa de cada coluna da linha passada
     def pintar_coluna(self, tela_principal, n_linha, linha):
@@ -183,24 +186,33 @@ class Cenario:
         if self.fase == 4:
             tela_congra()
             pass
+        if self.pacman.vidas == 0:
+            game_over()
+            pass
 
         # fase
         fonte_fase = pygame.font.SysFont("times", 36, True, False)          # (fonte, tamanho, negrito, itálico)
         texto_fase = "Fase: {}".format(str(self.fase))
+
         if self.fase == 1:
             img_fase = fonte_fase.render(texto_fase, True, cores.verde)
+            tela_principal.blit(img_fase, (620, 200))
         elif self.fase == 2:
             img_fase = fonte_fase.render(texto_fase, True, cores.laranja)
+            tela_principal.blit(img_fase, (620, 200))
         elif self.fase == 3:
             img_fase = fonte_fase.render(texto_fase, True, cores.vermelho)
-        tela_principal.blit(img_fase, (620, 200))
-
+            tela_principal.blit(img_fase, (620, 200))
 
         # pontos
         fonte_pontos = pygame.font.SysFont("times", 32, True, True)     # (fonte, tamanho, negrito, itálico)
         texto_pontos = "Pontos: {}".format(str(self.pontos))
         img_pontos = fonte_pontos.render(texto_pontos, True, cores.branco)
         tela_principal.blit(img_pontos, (612, 300))
+
+        text_vidas = "Vidas: {}".format(str(self.pacman.vidas))
+        img_vidas = fonte_pontos.render(text_vidas, True, cores.branco)
+        tela_principal.blit(img_vidas, (615, 400))
 
     # Função teste se o pacman pode se mover para a nova posição desejada
     # retira comida quando o pacman passa
