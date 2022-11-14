@@ -9,7 +9,7 @@ def tela_congra():
     while True:
         tela_cong.fill(cores.preto)
 
-        img_trofeu = pygame.image.load("imagens/trofeu-100.jpg")
+        img_trofeu = pygame.image.load("imagens/trofeus/trofeu-100.jpg")
         tela_cong.blit(img_trofeu, (300, 100))
 
         fonte = pygame.font.SysFont("times", 32, True, False)  # (fonte, tamanho, negrito, itálico)
