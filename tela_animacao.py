@@ -1,6 +1,8 @@
 from pacman import PacmanAnimacao
+from menu import menu
 import cores
 import pygame
+
 
 pygame.init()
 
@@ -8,8 +10,11 @@ tela_animacao = pygame.display.set_mode((800, 600), 0)
 pacman = PacmanAnimacao(800 // 30)
 pacman.posicao()
 tela_animacao.fill(cores.preto)
+pygame.display.set_caption('Pac3')
 
 while True:
+    clock = pygame.time.Clock()
+
     pacman.posicao()
     tela_animacao.fill(cores.preto)
 
@@ -30,5 +35,12 @@ while True:
 
     pacman.pac_setup(tela_animacao)
     pygame.display.update()
-    pygame.time.delay(200)
+
+    clock.tick(10)
+
+    for eve in pygame.event.get():
+        if eve.type == pygame.KEYDOWN:
+            menu()
+        if eve.type == pygame.QUIT:
+            exit()
 

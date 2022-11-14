@@ -1,6 +1,6 @@
+from tela_congratulations import tela_congra
 import pygame
 import cores
-
 # Como funciona o cálculo
 '''
     2- parede
@@ -16,7 +16,6 @@ import cores
     fase2 = 385 pontos
     fase3 = 321 ponto
 '''
-
 
 
 class Cenario:
@@ -181,6 +180,10 @@ class Cenario:
     # printar informações do jogo na tela
     def informacoes(self, tela_principal):
 
+        if self.fase == 4:
+            tela_congra()
+            pass
+
         # fase
         fonte_fase = pygame.font.SysFont("times", 36, True, False)          # (fonte, tamanho, negrito, itálico)
         texto_fase = "Fase: {}".format(str(self.fase))
@@ -191,6 +194,7 @@ class Cenario:
         elif self.fase == 3:
             img_fase = fonte_fase.render(texto_fase, True, cores.vermelho)
         tela_principal.blit(img_fase, (620, 200))
+
 
         # pontos
         fonte_pontos = pygame.font.SysFont("times", 32, True, True)     # (fonte, tamanho, negrito, itálico)
