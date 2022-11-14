@@ -1,3 +1,4 @@
+from tela_game_over import game_over
 from tela_congratulations import tela_congra
 import pygame
 import cores
@@ -22,9 +23,8 @@ class Cenario:
 
     # Quando chamar a classe é passado o tamanho qual a tela em que sera printado o cenario
     # o tamanho que terá o cenrio e qual sera a matriz correspondente a fase atual
-    def __init__(self, tamanho, pacman, fantasma):
+    def __init__(self, tamanho, pacman):
         self.pacman = pacman
-        self.fantasma = fantasma
         self.fase = self.pacman.fase
         self.aux = self.fase           # Utilizada para sempre guardar a fase antiga, para pode atualizar o novo cenário
         self.tamanho = tamanho
@@ -61,10 +61,6 @@ class Cenario:
                 [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2],
                 [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
             ]
-        self.acima = 1
-        self.baixo = 2
-        self.direita = 3
-        self.esquerda = 4
 
     # Função atualiza informações necessárias do cenário ao clicar na tecla secreta
     # ou ao comer todas as comidas e chgar no portão
@@ -104,6 +100,7 @@ class Cenario:
                 [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2]
             ]           # atualiza matriz
             self.pontos = 0                         # zera pontos
+            self.pacman.vidas = 4
         elif self.fase == 3:
             self.aux = self.fase                    # atualiza variável aux
             self.pacman = self.pacman
@@ -140,6 +137,7 @@ class Cenario:
                 [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
             ]           # atualiza matriz
             self.pontos = 0                         # zera pontos
+            self.pacman.vidas = 3
 
     # Varre a linha dada para pintar cada retâgulo da cor certa de cada coluna da linha passada
     def pintar_coluna(self, tela_principal, n_linha, linha):
@@ -188,10 +186,14 @@ class Cenario:
         if self.fase == 4:
             tela_congra()
             pass
+        if self.pacman.vidas == 0:
+            game_over()
+            pass
 
         # fase
         fonte_fase = pygame.font.SysFont("times", 36, True, False)          # (fonte, tamanho, negrito, itálico)
         texto_fase = "Fase: {}".format(str(self.fase))
+
         if self.fase == 1:
             img_fase = fonte_fase.render(texto_fase, True, cores.verde)
             tela_principal.blit(img_fase, (620, 200))
@@ -208,34 +210,13 @@ class Cenario:
         img_pontos = fonte_pontos.render(texto_pontos, True, cores.branco)
         tela_principal.blit(img_pontos, (612, 300))
 
-    def posicao_fantasma(self, linha, coluna):
-        direcoes = []                       # criando a lista de possibilidades de movimento
-
-        # verifica as posições
-        if self.matriz[linha][coluna] != 2:
-            # verifica se pode mover para cima
-            if self.matriz[linha-1][coluna] != 2:
-                direcoes.append(self.acima)
-
-            # verifica se pode mover para baixo
-            if self.matriz[linha + 1][coluna] != 2:
-                direcoes.append(self.baixo)
-
-            # verifica se pode mover para esquerda
-            if self.matriz[linha][coluna - 1] != 2:
-                direcoes.append(self.esquerda)
-
-            # verifica se pode mover para direita
-            if self.matriz[linha][coluna + 1] != 2:
-                direcoes.append(self.direita)
-        return direcoes
+        text_vidas = "Vidas: {}".format(str(self.pacman.vidas))
+        img_vidas = fonte_pontos.render(text_vidas, True, cores.branco)
+        tela_principal.blit(img_vidas, (615, 400))
 
     # Função teste se o pacman pode se mover para a nova posição desejada
     # retira comida quando o pacman passa
-    def teste_colisao(self):
-        direcoes_possiveis = self.posicao_fantasma(self.fantasma.lin, self.fantasma.col)
-        print(direcoes_possiveis)
-
+    def teste_colisao_pac(self):
         nova_col = self.pacman.col_intencao
         nova_lin = self.pacman.lin_intencao
         if 0 <= nova_col < 29 and 0 <= nova_lin < 30:
@@ -271,4 +252,3 @@ class Cenario:
                             self.pacman.lin_intencao = self.pacman.lin
 
                             self.novo_cenario()                             # Atualiza cenário
-

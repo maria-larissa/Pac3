@@ -20,6 +20,7 @@ class Pacman:
         self.lin_intencao = self.lin
         self.velocidade = 1
         self.fase = 1
+        self.vidas = 5
 
     # Função calcula novas posições
     def posicao(self):
