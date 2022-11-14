@@ -58,7 +58,8 @@ pt_opcao = Ponto()
 
 def menu():
     pygame.init()
-    pygame.display.set_caption('Menu')
+    pygame.display.set_caption('Pac3')
+
 
     while True:
         # clock = pygame.time.Clock()

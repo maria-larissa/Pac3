@@ -1,19 +1,30 @@
+import random
 import cores
 import pygame
 
 
 class Fantasmas:
+
     def __init__(self, tamanho, cor):
         self.tamanho = tamanho
         self.raio = self.tamanho // 2
         self.cor = cor
-        self.col = 14
-        self.lin = 12
+        self.col = 20
+        self.lin = 20
+        self.direcao = 1
         self.lin_inten = self.lin
         self.col_inten = self.col
-        self.vel_x = 0.5
-        self.vel_y = 0.5
-        self.velocidade = 0.5
+        self.velocidade = 1
+
+    def posicao(self):
+        if self.direcao == 1:
+            self.lin_inten -= self.velocidade
+        elif self.direcao == 2:
+            self.lin_inten += self.velocidade
+        elif self.direcao == 3:
+            self.col_inten -= self.velocidade
+        elif self.direcao == 4:
+            self.col_inten += self.velocidade
 
     def pintar_fantasma(self, tela_principal):
         co_x = int(self.tamanho * self.col)
@@ -47,5 +58,19 @@ class Fantasmas:
         # triangulo = [ponto_inf_esq, ponto_superior, pont_inf_dir]
         # pygame.draw.polygon(tela_principal, cores.azul, triangulo, 0)
 
-    def process_events(self):
-        pass
+    # muda a posição do fantasma caso esteja não haja colisão coma s pareddes
+    def prox_posicao(self):
+        self.lin = self.lin_inten
+        self.col = self.col_inten
+
+    def mudar_direcao(self, direcoes):
+        self.direcao = random.choice(direcoes)
+
+    def caso_esquina(self, direcoes):
+        self.mudar_direcao(direcoes)
+
+    # escolhe a nova posição caso haja colisão na posição anteriormente escolhida
+    def permanecer_posicao(self, direcoes):
+        self.lin_inten = self.lin
+        self.col_inten = self.col
+        self.mudar_direcao(direcoes)

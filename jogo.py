@@ -1,5 +1,5 @@
 from pacman import Pacman
-from fastasmas import Fantasmas
+from fantasmas import Fantasmas
 from cenarios import Cenario
 import cores
 import pygame
@@ -7,7 +7,7 @@ import pygame
 
 def loop_principal():
     pygame.init()
-
+    pygame.display.set_caption('Pac3')
     tela_principal = pygame.display.set_mode((800, 600), 0)     # Criando a tela do jogo
     tamanho = 600 // 30                                         # Definição tamanho do pacman e dos retângulos
     pacman = Pacman(tamanho)                                    # criando um objeto do tipo Pacman
@@ -17,7 +17,8 @@ def loop_principal():
     while True:
 
         pacman.posicao()                                # Calculando posições do pacman
-        cen.teste_colisao()                         # Testando a intenção de movimento do pacman
+        fantasma.posicao()                              # Calculando posições do fantasma
+        cen.teste_colisao()                             # Testando a intenção de movimento do pacman
         tela_principal.fill(cores.preto)                # Limpando a tela, para não aparecer rastros
         cen.pintar_cenario(tela_principal)              # Pintando o cenário
         pacman.pac_setup(tela_principal)                # Pintando pacman

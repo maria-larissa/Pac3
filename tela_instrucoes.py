@@ -1,7 +1,6 @@
 import cores
 import pygame
 
-
 def seta_esq(tela):
     tamanho = 16
     x_set_esq = 100 - tamanho
@@ -9,7 +8,7 @@ def seta_esq(tela):
     set_esq1 = (x_set_esq - tamanho, y_set_esq - 3)
     set_esq2 = (x_set_esq - (tamanho + 3), y_set_esq)
     set_esq3 = (x_set_esq - tamanho, y_set_esq + 3)
-    seta_esquerda = [set_esq1, set_esq2, set_esq3]
+    seta_esquerda= [set_esq1, set_esq2, set_esq3]
     pygame.draw.polygon(tela, cores.branco, seta_esquerda, 0)
     pygame.draw.rect(tela, cores.branco, (x_set_esq - tamanho, y_set_esq, tamanho, 2), 0)
     x_caixa_esq = x_set_esq - tamanho - 10
@@ -30,7 +29,7 @@ def seta_dir(tela):
     pygame.draw.polygon(tela, cores.branco, seta_direita, 0)
     pygame.draw.rect(tela, cores.branco, (x_set_dir - tamanho, y_set_dir, tamanho, 2), 0)
     x_caixa_dir = x_set_dir - tamanho - 8
-    y_caixa_dir = y_set_dir - 11
+    y_caixa_dir= y_set_dir - 11
     largura_dir = tamanho + 20
     altura_dir = tamanho + 11
     pygame.draw.rect(tela, cores.branco, (x_caixa_dir, y_caixa_dir, largura_dir, altura_dir), 2, 5)
@@ -39,7 +38,7 @@ def seta_dir(tela):
 def seta_cim(tela):
     tamanho = 16
     x_set_cim = 110
-    y_set_cim = 140
+    y_set_cim= 140
     set_cim1 = (x_set_cim - 3, y_set_cim)
     set_cim2 = (x_set_cim, y_set_cim - 3)
     set_cim3 = (x_set_cim + 3, y_set_cim)
@@ -48,7 +47,7 @@ def seta_cim(tela):
     pygame.draw.rect(tela, cores.branco, (x_set_cim, y_set_cim, 2, tamanho), 0)
     x_caixa_cim = x_set_cim - 12
     y_caixa_cim = y_set_cim - 10
-    largura_cim = tamanho + 11
+    largura_cim  = tamanho + 11
     altura_cim = tamanho + 20
     pygame.draw.rect(tela, cores.branco, (x_caixa_cim, y_caixa_cim, largura_cim, altura_cim), 2, 5)
 

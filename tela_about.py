@@ -4,7 +4,8 @@ import pygame
 
 def about():
     tela_about = pygame.display.set_mode((800, 600), 0)
-    pygame.display.set_caption('About')
+    pygame.display.set_caption('Pac3')
+
     while True:
         # clock = pygame.time.Clock()
         tela_about.fill(cores.preto)
