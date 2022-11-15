@@ -3,14 +3,24 @@ import cores
 import pygame
 
 
+def lista_fantasmas(tamanho):
+    fantasma1 = Fantasmas(tamanho, cores.vermelho_intenso)  # criando um objeto do tipo Fantasma
+    fantasma2 = Fantasmas(tamanho, cores.azul_escuro)  # criando um objeto do tipo Fantasma
+    fantasma3 = Fantasmas(tamanho, cores.rosa)  # criando um objeto do tipo Fantasma
+    fantasma4 = Fantasmas(tamanho, cores.roxo)  # criando um objeto do tipo Fantasma
+    fantasma5 = Fantasmas(tamanho, cores.verde_claro)  # criando um objeto do tipo Fantasma
+    lista = [fantasma1, fantasma2, fantasma3, fantasma4, fantasma5]
+    return lista
+
+
 class Fantasmas:
 
     def __init__(self, tamanho, cor):
         self.tamanho = tamanho
         self.raio = self.tamanho // 2
         self.cor = cor
-        self.col = 20
-        self.lin = 20
+        self.lin = 1
+        self.col = 27
         self.direcao = 1
         self.lin_inten = self.lin
         self.col_inten = self.col

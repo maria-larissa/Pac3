@@ -2,30 +2,15 @@ from tela_game_over import game_over
 from tela_congratulations import tela_congra
 import pygame
 import cores
-# Como funciona o cálculo
-'''
-    2- parede
-    1 - comida
-    0 - vazio
-
-    coordenadas retnagulos
-    tamanho = 800 // 30
-    x = col * tamanho
-    y = lin * tamanho
-
-    fase1 = 325 pontos
-    fase2 = 385 pontos
-    fase3 = 321 ponto
-'''
 
 
 class Cenario:
 
     # Quando chamar a classe é passado o tamanho qual a tela em que sera printado o cenario
     # o tamanho que terá o cenrio e qual sera a matriz correspondente a fase atual
-    def __init__(self, tamanho, pacman, fant):
+    def __init__(self, tamanho, pacman, lista_fantasmas):
         self.pacman = pacman
-        self.fantasma = fant
+        self.fantasmas = lista_fantasmas
         self.fase = self.pacman.fase
         self.aux = self.fase           # Utilizada para sempre guardar a fase antiga, para pode atualizar o novo cenário
         self.tamanho = tamanho
@@ -242,72 +227,78 @@ class Cenario:
     # Função teste se o pacman pode se mover para a nova posição desejada
     # retira comida quando o pacman passa
     def teste_colisao(self):
-        #caso pacman colida com o fantasma
-        if self.pacman.lin == self.fantasma.lin and self.pacman.col == self.fantasma.col:
-            self.pacman.vidas -= 1
-            # Faz pacman voltar pra posição inicial
-            self.pacman.centro_x = 400
-            self.pacman.centro_y = 300
-            self.pacman.velocidade_x = 0
-            self.pacman.velocidade_y = 0
-            self.pacman.col = 1
-            self.pacman.lin = 1
-            self.pacman.col_intencao = self.pacman.col
-            self.pacman.lin_intencao = self.pacman.lin
+        tamanho = self.pacman.fase + 1
+        if self.pacman.fase == 3:
+            tamanho = 5
+        for i in range(0, tamanho):
+            # caso pacman colida com o fantasma
+            if self.pacman.lin == self.fantasmas[i].lin and self.pacman.col == self.fantasmas[i].col:
+                self.pacman.vidas -= 1
+                # Faz pacman voltar pra posição inicial
+                self.pacman.centro_x = 400
+                self.pacman.centro_y = 300
+                self.pacman.velocidade_x = 0
+                self.pacman.velocidade_y = 0
+                self.pacman.col = 1
+                self.pacman.lin = 1
+                self.pacman.col_intencao = self.pacman.col
+                self.pacman.lin_intencao = self.pacman.lin
 
-        direcoes_possiveis = self.posicao_fantasma(self.fantasma.lin, self.fantasma.col)
-        print(direcoes_possiveis)
+            direcoes_possiveis = self.posicao_fantasma(self.fantasmas[i].lin, self.fantasmas[i].col)
 
         # Caso o fantasma chegue em um esquina ou cruzamento
-        if len(direcoes_possiveis) >= 3:
-            self.fantasma.caso_esquina(direcoes_possiveis)
+            if len(direcoes_possiveis) >= 3:
+                self.fantasmas[i].caso_esquina(direcoes_possiveis)
 
-        # teste colisao para o pacman
-        col_pac = self.pacman.col_intencao
-        lin_pac = self.pacman.lin_intencao
-        if 0 <= col_pac < 29 and 0 <= lin_pac < 30:
-            if self.matriz[lin_pac][col_pac] != 2:                # Caso a posição NÃO seja parede
-                self.pacman.prox_posicao()
+            # teste colisao para o pacman
+            col_pac = self.pacman.col_intencao
+            lin_pac = self.pacman.lin_intencao
+            if 0 <= col_pac < 29 and 0 <= lin_pac < 30:
+                if self.matriz[lin_pac][col_pac] != 2:                # Caso a posição NÃO seja parede
+                    self.pacman.prox_posicao()
 
-                if self.matriz[lin_pac][col_pac] == 1:            # Caso tenha comida aumenta pontos e apaga a comida
-                    self.pontos += 1
-                    print(self.pontos)
-                    self.matriz[lin_pac][col_pac] = 0
+                    if self.matriz[lin_pac][col_pac] == 1:         # Caso tenha comida aumenta pontos e apaga a comida
+                        self.pontos += 1
+                        print(self.pontos)
+                        self.matriz[lin_pac][col_pac] = 0
 
-                if self.matriz[lin_pac][col_pac] == 0:            # verificar se comeu tudo e chegou no centro(portal)
+                    if self.matriz[lin_pac][col_pac] == 0:          # verificar se comeu tudo e chegou no centro(portal)
 
-                    # verifica se chegou no centro
-                    if lin_pac in range(13, 16) and col_pac in range(12, 15):
+                        # verifica se chegou no centro
+                        if lin_pac in range(13, 16) and col_pac in range(12, 15):
 
-                        # verifica se comeu tudo de acordo com a fase
-                        if self.pontos == 296 or self.pontos == 324 or self.pontos == 321:
+                            # verifica se comeu tudo de acordo com a fase
+                            if self.pontos == 296 or self.pontos == 324 or self.pontos == 321:
 
-                            # print("fase")
-                            # print(self.fase)
+                                # print("fase")
+                                # print(self.fase)
 
-                            self.aux = self.fase                            # Guarda valor anterior da fase
-                            self.pacman.fase += 1                           # Incrementa a fase, faz passar de fase
+                                self.aux = self.fase                            # Guarda valor anterior da fase
+                                self.pacman.fase += 1                           # Incrementa a fase, faz passar de fase
 
-                            # Faz pacman voltar pra posição inicial
-                            self.pacman.centro_x = 400
-                            self.pacman.centro_y = 300
-                            self.pacman.velocidade_x = 0
-                            self.pacman.velocidade_y = 0
-                            self.pacman.col = 1
-                            self.pacman.lin = 1
-                            self.pacman.col_intencao = self.pacman.col
-                            self.pacman.lin_intencao = self.pacman.lin
+                                # Faz pacman voltar pra posição inicial
+                                self.pacman.centro_x = 400
+                                self.pacman.centro_y = 300
+                                self.pacman.velocidade_x = 0
+                                self.pacman.velocidade_y = 0
+                                self.pacman.col = 1
+                                self.pacman.lin = 1
+                                self.pacman.col_intencao = self.pacman.col
+                                self.pacman.lin_intencao = self.pacman.lin
+                                for j in range(0, 5):
+                                    self.fantasmas[j].lin = 28
+                                    self.fantasmas[j].col = 27
+                                self.novo_cenario()                             # Atualiza cenário
 
-                            self.novo_cenario()                             # Atualiza cenário
-
-        # teste colisao para o fantasma
-        col_fan = int(self.fantasma.col_inten)
-        lin_fan = int(self.fantasma.lin_inten)
-        if 0 <= col_fan < 29 and 0 <= lin_fan < 30:
-            if self.matriz[lin_fan][col_fan] != 2:
-                self.fantasma.prox_posicao()
-            else:
-                self.fantasma.permanecer_posicao(direcoes_possiveis)
+            # teste colisao para o fantasma
+            col_fan = int(self.fantasmas[i].col_inten)
+            lin_fan = int(self.fantasmas[i].lin_inten)
+            if 0 <= col_fan < 29 and 0 <= lin_fan < 30:
+                if self.matriz[lin_fan][col_fan] != 2:
+                        self.fantasmas[i].prox_posicao()
+                else:
+                    self.fantasmas[i].permanecer_posicao(direcoes_possiveis)
+            i += 1
 
         for eve in pygame.event.get():
             if eve.type == pygame.QUIT:

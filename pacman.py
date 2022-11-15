@@ -7,7 +7,7 @@ pygame.init()
 class Pacman:
     # Larissa: Atualizei a característica tamanho do pacman de "640 // 30"
     # para tanho que varia de acordo com o tamanho dos retangulos
-    def __init__(self, tamanho):      # Definicao de tamanho, raio e centro.
+    def __init__(self, tamanho, fant):      # Definicao de tamanho, raio e centro.
         self.centro_x = 400
         self.centro_y = 300
         self.tamanho = tamanho
@@ -21,6 +21,7 @@ class Pacman:
         self.velocidade = 1
         self.fase = 1
         self.vidas = 5
+        self.fantasmas = fant
 
     # Função calcula novas posições
     def posicao(self):
@@ -51,7 +52,7 @@ class Pacman:
         pygame.draw.circle(tela_principal, cores.preto, (olho_x, olho_y), raio_olho, 0)
 
     # Verifica  as teclas que estao sendo apertadas
-    def process_events(self, eventos):
+    def process_events(self, eventos, tela):
         for e in eventos:
             # Interpretador de movimentos
             if e.type == pygame.KEYDOWN:
@@ -76,8 +77,10 @@ class Pacman:
                                 self.lin = 1
                                 self.col_intencao = self.col
                                 self.lin_intencao = self.lin
-                            else:
-                                print("Congratulations!")
+                                for j in range(0, 5):
+                                    self.fantasmas[j].lin = 1
+                                    self.fantasmas[j].col = 27
+                                    self.fantasmas[j].pintar_fantasma(tela)
 
             if e.type == pygame.KEYUP:
                 if e.key == pygame.K_RIGHT:
