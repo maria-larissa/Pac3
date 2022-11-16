@@ -3,13 +3,15 @@ import cores
 import pygame
 
 
+# Função que cria e retorna um vetor (lista) com 5 fantasmas
 def lista_fantasmas(tamanho):
     fantasma1 = Fantasmas(tamanho, cores.vermelho_intenso)  # criando um objeto do tipo Fantasma
-    fantasma2 = Fantasmas(tamanho, cores.azul_escuro)  # criando um objeto do tipo Fantasma
-    fantasma3 = Fantasmas(tamanho, cores.rosa)  # criando um objeto do tipo Fantasma
-    fantasma4 = Fantasmas(tamanho, cores.roxo)  # criando um objeto do tipo Fantasma
-    fantasma5 = Fantasmas(tamanho, cores.verde_claro)  # criando um objeto do tipo Fantasma
-    lista = [fantasma1, fantasma2, fantasma3, fantasma4, fantasma5]
+    fantasma2 = Fantasmas(tamanho, cores.azul_escuro)       # criando um objeto do tipo Fantasma
+    fantasma3 = Fantasmas(tamanho, cores.rosa)              # criando um objeto do tipo Fantasma
+    fantasma4 = Fantasmas(tamanho, cores.roxo)              # criando um objeto do tipo Fantasma
+    fantasma5 = Fantasmas(tamanho, cores.verde_claro)       # criando um objeto do tipo Fantasma
+
+    lista = [fantasma1, fantasma2, fantasma3, fantasma4, fantasma5]     # Crio a lista
     return lista
 
 
@@ -26,6 +28,7 @@ class Fantasmas:
         self.col_inten = self.col
         self.velocidade = 1
 
+    # Função define para qual direção vai o fantasma
     def posicao(self):
         if self.direcao == 1:
             self.lin_inten -= self.velocidade
@@ -41,11 +44,11 @@ class Fantasmas:
         co_y = int(self.tamanho * self.lin)
         pygame.draw.rect(tela_principal, self.cor, (co_x + 1, co_y + 2,
                                                     self.tamanho - 2, self.tamanho - 4), 0, 2)
-        # Criando desenho do olho
+        # Criando desenho do olho1
         olho_x1 = int(co_x + self.raio - 2)
         olho_y1 = int(co_y + self.raio - 2)
 
-        # Criando desenho do olho
+        # Criando desenho do olho2
         olho_x2 = int(co_x + 2 * (self.raio - 3))
         olho_y2 = int(co_y + self.raio - 2)
         raio_olho = int(self.raio / 5)
@@ -61,21 +64,16 @@ class Fantasmas:
         # printando boca
         pygame.draw.rect(tela_principal, cores.preto, (boca_x, boca_y, 10, 3), 0)
 
-        # Fantasma Triangulo
-        # ponto_superior = (co_x + self.raio, co_y + 4)
-        # ponto_inf_esq = (co_x + 4, co_y + (2 * self.raio) - 4)
-        # pont_inf_dir = (co_x + (2 * self.raio) - 4, co_y + (2 * self.raio) - 4)
-        # triangulo = [ponto_inf_esq, ponto_superior, pont_inf_dir]
-        # pygame.draw.polygon(tela_principal, cores.azul, triangulo, 0)
-
-    # muda a posição do fantasma caso esteja não haja colisão coma s pareddes
+    # muda a posição do fantasma caso não haja colisão com as pareddes
     def prox_posicao(self):
         self.lin = self.lin_inten
         self.col = self.col_inten
 
+    # função auxiliar usada nas duas funções abaixo
     def mudar_direcao(self, direcoes):
         self.direcao = random.choice(direcoes)
 
+    # Função que decide quando tiver 3 possibilidades de escolha pa ra a direção do fantasma
     def caso_esquina(self, direcoes):
         self.mudar_direcao(direcoes)
 

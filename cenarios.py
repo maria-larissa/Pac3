@@ -295,7 +295,7 @@ class Cenario:
             lin_fan = int(self.fantasmas[i].lin_inten)
             if 0 <= col_fan < 29 and 0 <= lin_fan < 30:
                 if self.matriz[lin_fan][col_fan] != 2:
-                        self.fantasmas[i].prox_posicao()
+                    self.fantasmas[i].prox_posicao()
                 else:
                     self.fantasmas[i].permanecer_posicao(direcoes_possiveis)
             i += 1

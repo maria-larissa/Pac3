@@ -1,6 +1,8 @@
 import cores
 import pygame
 
+
+# função desenha seta para esquerda
 def seta_esq(tela):
     tamanho = 16
     x_set_esq = 100 - tamanho
@@ -8,7 +10,7 @@ def seta_esq(tela):
     set_esq1 = (x_set_esq - tamanho, y_set_esq - 3)
     set_esq2 = (x_set_esq - (tamanho + 3), y_set_esq)
     set_esq3 = (x_set_esq - tamanho, y_set_esq + 3)
-    seta_esquerda= [set_esq1, set_esq2, set_esq3]
+    seta_esquerda = [set_esq1, set_esq2, set_esq3]
     pygame.draw.polygon(tela, cores.branco, seta_esquerda, 0)
     pygame.draw.rect(tela, cores.branco, (x_set_esq - tamanho, y_set_esq, tamanho, 2), 0)
     x_caixa_esq = x_set_esq - tamanho - 10
@@ -18,6 +20,7 @@ def seta_esq(tela):
     pygame.draw.rect(tela, cores.branco, (x_caixa_esq, y_caixa_esq, largura_esq, altura_esq), 2, 5)
 
 
+# função desenha seta para direita
 def seta_dir(tela):
     tamanho = 16
     x_set_dir = 155
@@ -29,16 +32,17 @@ def seta_dir(tela):
     pygame.draw.polygon(tela, cores.branco, seta_direita, 0)
     pygame.draw.rect(tela, cores.branco, (x_set_dir - tamanho, y_set_dir, tamanho, 2), 0)
     x_caixa_dir = x_set_dir - tamanho - 8
-    y_caixa_dir= y_set_dir - 11
+    y_caixa_dir = y_set_dir - 11
     largura_dir = tamanho + 20
     altura_dir = tamanho + 11
     pygame.draw.rect(tela, cores.branco, (x_caixa_dir, y_caixa_dir, largura_dir, altura_dir), 2, 5)
 
 
+# função desenha seta para cima
 def seta_cim(tela):
     tamanho = 16
     x_set_cim = 110
-    y_set_cim= 140
+    y_set_cim = 140
     set_cim1 = (x_set_cim - 3, y_set_cim)
     set_cim2 = (x_set_cim, y_set_cim - 3)
     set_cim3 = (x_set_cim + 3, y_set_cim)
@@ -47,11 +51,12 @@ def seta_cim(tela):
     pygame.draw.rect(tela, cores.branco, (x_set_cim, y_set_cim, 2, tamanho), 0)
     x_caixa_cim = x_set_cim - 12
     y_caixa_cim = y_set_cim - 10
-    largura_cim  = tamanho + 11
+    largura_cim = tamanho + 11
     altura_cim = tamanho + 20
     pygame.draw.rect(tela, cores.branco, (x_caixa_cim, y_caixa_cim, largura_cim, altura_cim), 2, 5)
 
 
+# função desenha seta para baixo
 def seta_bai(tela):
     tamanho = 16
     x_set_bai = 110
@@ -78,11 +83,13 @@ def instrucao():
     while True:
         tela_instrucao.fill(cores.preto)
 
+        # Titulo "instruções"
         fonte = pygame.font.SysFont("times", 32, True, False)  # (fonte, tamanho, negrito, itálico)
         titulo_instrucao = "Instruções do jogo"
         img_1 = fonte.render(titulo_instrucao, True, cores.branco)
         tela_instrucao.blit(img_1, (260, 30))
 
+        # Subtítulo "quais telas devo usar"
         fonte1 = pygame.font.SysFont("times", 18, True, True)  # (fonte, tamanho, negrito, itálico)
         titulo_teclas = "1- Quais teclas devo usar?"
         img_2 = fonte1.render(titulo_teclas, True, cores.branco)
@@ -92,10 +99,12 @@ def instrucao():
         seta_cim(tela_instrucao)
         seta_bai(tela_instrucao)
 
+        # Subtítulo "objetivo"
         titulo_objetivo = "2- Objetivo"
         img_3 = fonte1.render(titulo_objetivo, True, cores.branco)
         tela_instrucao.blit(img_3, (30, 270))
 
+        # Texto sobre qual é o objetivo
         fonte_texto = pygame.font.SysFont("times", 16, False, False)  # (fonte, tamanho, negrito, itálico)
         obj_linha1 = "    Você deve pegar todas as comidinhas de cada fase"
         obj_linha2 = "e chegar ao portal, localizado no centro de cada fase,"
@@ -107,18 +116,13 @@ def instrucao():
         tela_instrucao.blit(img_5, (30, 315))
         tela_instrucao.blit(img_6, (30, 330))
 
+        # Subtitulo "quantas fases"
         titulo_fases = "3- Número de fases"
         img_7 = fonte1.render(titulo_fases, True, cores.branco)
         tela_instrucao.blit(img_7, (30, 390))
         texto_fase = "     O jogo possui apanas 3 fases."
         img_8 = fonte_texto.render(texto_fase, True, cores.branco)
         tela_instrucao.blit(img_8, (30, 415))
-
-        # fonte2 = pygame.font.SysFont("times", 18, True, False)  # (fonte, tamanho, negrito, itálico)
-        # opcao_voltar = "Voltar"
-        # img_voltar = fonte2.render(opcao_voltar, True, cores.branco)
-        # tela_instrucao.blit(img_voltar, (690, 530))
-        # pygame.draw.circle(tela_instrucao, cores.branco, (682, 539), 4, 0)
 
         pygame.display.update()
 

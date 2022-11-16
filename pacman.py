@@ -5,9 +5,7 @@ pygame.init()
 
 
 class Pacman:
-    # Larissa: Atualizei a característica tamanho do pacman de "640 // 30"
-    # para tanho que varia de acordo com o tamanho dos retangulos
-    def __init__(self, tamanho, fant):      # Definicao de tamanho, raio e centro.
+    def __init__(self, tamanho, fant):      # Definicao das características INICIAIS do Pacman.
         self.centro_x = 400
         self.centro_y = 300
         self.tamanho = tamanho
@@ -23,7 +21,7 @@ class Pacman:
         self.vidas = 5
         self.fantasmas = fant
 
-    # Função calcula novas posições
+    # Função calcula novas posições do pacman
     def posicao(self):
         self.col_intencao = self.col + self.velocidade_x
         self.lin_intencao = self.lin + self.velocidade_y
@@ -54,7 +52,9 @@ class Pacman:
     # Verifica  as teclas que estao sendo apertadas
     def process_events(self, eventos, tela):
         for e in eventos:
-            # Interpretador de movimentos
+            # Interpretador de movimentos do pacman
+
+            # Quando apertar uma das teclas
             if e.type == pygame.KEYDOWN:
                 if e.key == pygame.K_RIGHT:
                     self.velocidade_x = self.velocidade
@@ -67,6 +67,8 @@ class Pacman:
                 else:
                     if e.mod & pygame.KMOD_SHIFT:                   # tecla secreta
                         if e.key == pygame.K_DELETE:
+
+                            # reseta as posições do pacman e dos fantasmas
                             if 1 <= self.fase <= 3:
                                 self.fase += 1
                                 self.centro_x = 400
@@ -82,6 +84,7 @@ class Pacman:
                                     self.fantasmas[j].col = 27
                                     self.fantasmas[j].pintar_fantasma(tela)
 
+            # quanfo soltar uma das teclas
             if e.type == pygame.KEYUP:
                 if e.key == pygame.K_RIGHT:
                     self.velocidade_x = 0

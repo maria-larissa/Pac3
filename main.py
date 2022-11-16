@@ -43,4 +43,3 @@ while True:
             menu()
         if eve.type == pygame.QUIT:
             exit()
-

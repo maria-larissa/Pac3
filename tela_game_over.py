@@ -10,9 +10,11 @@ def game_over():
     while True:
         tela_over.fill(cores.preto)
 
+        # Colando imagem game over
         img_over = pygame.image.load("imagens/game_over-300.jpg")
         tela_over.blit(img_over, (200, 50))
 
+        # Texto da tela
         fonte = pygame.font.SysFont("times", 32, True, False)  # (fonte, tamanho, negrito, itálico)
         pygame.draw.rect(tela_over, cores.branco, (200, 380, 400, 1), 0)
         text_over = "Tente novamente!"

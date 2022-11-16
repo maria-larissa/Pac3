@@ -10,9 +10,11 @@ def tela_congra():
     while True:
         tela_cong.fill(cores.preto)
 
+        # Colando imagem do trofeu
         img_trofeu = pygame.image.load("imagens/trofeu-100.jpg")
         tela_cong.blit(img_trofeu, (300, 100))
 
+        # Texto da tela
         fonte = pygame.font.SysFont("times", 32, True, False)  # (fonte, tamanho, negrito, itálico)
         pygame.draw.rect(tela_cong, cores.branco, (200, 350, 400, 1), 0)
         text_congra = "Parabéns"

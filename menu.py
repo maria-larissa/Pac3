@@ -60,10 +60,7 @@ def menu():
     pygame.init()
     pygame.display.set_caption('Pac3')
 
-
     while True:
-        # clock = pygame.time.Clock()
-
         tela_menu.fill(cores.preto)
 
         # Mantem o loop do pontinho nas posições especificadas
@@ -76,13 +73,13 @@ def menu():
         pt_opcao.desenhar()
 
         # Printa o titulo da opção "menu"
-        fonte = pygame.font.SysFont("times", 38, True, False)  # (fonte, tamanho, negrito, itálico)
+        fonte = pygame.font.SysFont("times", 38, True, False)       # (fonte, tamanho, negrito, itálico)
         titulo_menu = "Menu Principal"
-        img_titulo = fonte.render(titulo_menu, True, cores.branco)
+        img_titulo = fonte.render(titulo_menu, True, cores.branco)  # (texto, suavização, cor)
         tela_menu.blit(img_titulo, (270, 150))
 
-        # Printa o titulo da opção "opções"
-        fonte1 = pygame.font.SysFont("times", 25, True, False)  # (fonte, tamanho, negrito, itálico)
+        # Printa o titulo da opção "começar"
+        fonte1 = pygame.font.SysFont("times", 25, True, False)      # (fonte, tamanho, negrito, itálico)
         opcao_play = "Play"
         img_play = fonte1.render(opcao_play, True, cores.branco)
         tela_menu.blit(img_play, (260, 290))
@@ -105,7 +102,7 @@ def menu():
         pygame.display.update()                         # Update da tela
         pygame.time.delay(50)
         eventos = pygame.event.get()                    # Armazena os eventos da tela
-        pt_opcao.pro_eventos(eventos)                   # Processa os eventos dessa tela
+        pt_opcao.pro_eventos(eventos)                   # Processa os eventos do pontinho
 
         # Processa os eventos da tela
         for e in eventos:

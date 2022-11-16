@@ -7,18 +7,20 @@ def about():
     pygame.display.set_caption('Pac3')
 
     while True:
-        # clock = pygame.time.Clock()
+        # Titulo "sobre"
         tela_about.fill(cores.preto)
         fonte = pygame.font.SysFont("times", 32, True, False)  # (fonte, tamanho, negrito, itálico)
         titulo_about = "Sobre"
         img_1 = fonte.render(titulo_about, True, cores.branco)
         tela_about.blit(img_1, (360, 30))
 
+        # Subtitulo "criadores"
         fonte1 = pygame.font.SysFont("times", 20, True, True)  # (fonte, tamanho, negrito, itálico)
         titulo_criadores = "Criadores"
         img_2 = fonte1.render(titulo_criadores, True, cores.branco)
         tela_about.blit(img_2, (360, 140))
 
+        # Informações "Maria Larissa"
         fonte_texto = pygame.font.SysFont("times", 18, False, False)  # (fonte, tamanho, negrito, itálico)
         aut1_lin1 = "Maria Larissa da Silva Andrade"
         aut1_lin2 = "Graduanda em Matemática computacional"
@@ -33,6 +35,7 @@ def about():
         tela_about.blit(img_5, (295, 220))
         tela_about.blit(img_6, (305, 235))
 
+        # Informações "Nazareno Mateus"
         aut2_lin1 = "Nazareno Mateus de Sousa"
         aut2_lin2 = "Graduando em Matemática computacional"
         aut2_lin3 = "Universidde Federal do Cariri"
