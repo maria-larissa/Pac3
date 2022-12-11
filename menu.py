@@ -108,7 +108,7 @@ def menu():
         for e in eventos:
             # Saber qual a opcao selecionada e ir para a tela correspondente
             if e.type == pygame.KEYDOWN:
-                if e.key == pygame.K_KP_ENTER:
+                if e.key == pygame.K_RETURN or e.key == pygame.K_KP_ENTER:
                     if pt_opcao.opcao == 1:
                         loop_principal()
                     elif pt_opcao.opcao == 2:
