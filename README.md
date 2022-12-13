@@ -22,10 +22,10 @@ O projeto Pac3 consiste em um remake do jogo Pacman, possui apenas três fases e
 #### **Instruction**
 * Baixar e descompactar a pasta.zip "Pac3" seguindo o passo a passo abaixo;
   1. Ao abrir o repositorio, clique no botão "code"
-  <img src="src/bt_code.png" width="600" height="350" />
+  <img src="imagens/Screenshot from 2022-12-13 17-03-51.png" width="600" height="250" />
   
   2. Baixe a pasta zipada.
-  <img src="src/bt_baixar.png" width="600" height="350" />
+  <img src="imagens/Screenshot from 2022-12-13 17-04-02.png" width="600" height="300" />
 * Descompacte a pasta "Pac3" e abra pelo CMD/prompt de comando.
 * Executar somente o arquivo "main.py" com o python, através do comando
 
