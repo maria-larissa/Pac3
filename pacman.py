@@ -21,6 +21,11 @@ class Pacman:
         self.vidas = 5
         self.fantasmas = fant
 
+    # Retorna a fase que o pacman está
+    def fase(self):
+        return self.fase
+
+
     # Função calcula novas posições do pacman
     def posicao(self):
         self.col_intencao = self.col + self.velocidade_x

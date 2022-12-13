@@ -12,12 +12,12 @@ pacman.posicao()
 tela_animacao.fill(cores.preto)
 pygame.display.set_caption('Pac3')
 
+
 while True:
     clock = pygame.time.Clock()
 
     pacman.posicao()
     tela_animacao.fill(cores.preto)
-
     # titulo jogo
     fonte = pygame.font.SysFont("times", 100, True, False)  # (fonte, tamanho, negrito, itálico)
     titulo_jogo = "Pac3"

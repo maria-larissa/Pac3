@@ -128,6 +128,7 @@ class Cenario:
             ]           # atualiza matriz
             self.pontos = 0                         # zera pontos
             self.pacman.vidas = 3
+        return self.fase
 
     # Varre a linha dada para pintar cada retâgulo da cor certa de cada coluna da linha passada
     def pintar_coluna(self, tela_principal, n_linha, linha):
@@ -303,3 +304,6 @@ class Cenario:
         for eve in pygame.event.get():
             if eve.type == pygame.QUIT:
                 exit()
+
+    def matriz(self):
+        return self.matriz
