@@ -25,6 +25,7 @@ def tela_congra():
         tela_cong.blit(img_13, (250, 430))
 
         pygame.display.update()
+        pygame.display.update()
 
         for eve in pygame.event.get():
             if eve.type == pygame.QUIT or eve.type == pygame.KEYDOWN:
