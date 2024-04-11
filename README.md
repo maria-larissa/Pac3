@@ -1,5 +1,5 @@
 # Pac3
-![Badge em Desenvolvimento](http://img.shields.io/static/v1?label=STATUS&message=EM%20DESENVOLVIMENTO&color=GREEN&style=for-the-badge)
+![Badge em Desenvolvimento](http://img.shields.io/static/v1?label=STATUS&message=finalizado&color=GREEN&style=for-the-badge)
 ![GitHub Org's stars](https://img.shields.io/github/stars/maria-larissa/Pac3?style=social)
 
 O projeto Pac3 consiste em um remake do jogo Pacman, possui apenas três fases e alguns truques que o original não possui. Desenvolvido com objetivo de obter nota na disciplina Laboratório de Programação no curso de Matemática Computacional na Universidade Federal do Cariri (UFCA).
